@@ -1,16 +1,25 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
 
 const VEHICLEDIR = './vehicles/'
 
+// every  response we send has these headers
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
 app.get('/api/subdirectories', (req, res) => {
 
   fs.readdir(VEHICLEDIR, { withFileTypes: true }, (err, files) => {
-    if (err) {
+    if (err) {  
       console.error(err);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
