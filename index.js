@@ -8,6 +8,28 @@ const PORT = 3000;
 
 const VEHICLEDIR = './vehicles/'
 
+//read questions files
+var mmpQuestions;
+fs.readFile('./questions/mmp.json', 'utf8', (err, data) => {
+  if (err) {
+    console.error('Erreur lors de la lecture du fichier:', err);
+    return;
+  }
+
+  // Analyser le contenu du fichier JSON
+  const questionsData = JSON.parse(data);
+
+  // Obtenir un tableau de questions
+  mmpQuestions = questionsData.questions;
+
+  // Vérifier qu'il y a des questions dans le fichier
+  if (mmpQuestions.length === 0) {
+    console.log('Aucune question disponible.');
+    return;
+  }
+});
+
+
 // every  response we send has these headers
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -19,7 +41,7 @@ app.use((req, res, next) => {
 app.get('/api/subdirectories', (req, res) => {
 
   fs.readdir(VEHICLEDIR, { withFileTypes: true }, (err, files) => {
-    if (err) {  
+    if (err) {
       console.error(err);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
@@ -83,6 +105,17 @@ function getContentType(fileName) {
       return 'application/octet-stream';
   }
 }
+
+app.get('/api/mmp', (req, res) => {
+
+  const randomIndex = Math.floor(Math.random() * mmpQuestions.length);
+  const randomQuestion = mmpQuestions[randomIndex];
+
+  res.json({
+    question: randomQuestion.question,
+    answer: randomQuestion.réponse
+  });
+});
 
 // Start the server
 app.listen(PORT, () => {

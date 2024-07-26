@@ -1,0 +1,23 @@
+{"questions": [
+    {
+      "question": "Quelle est la capitale de la France ?",
+      "réponse": "La capitale de la France est Paris."
+    },
+    {
+      "question": "Quel est le plus grand océan du monde ?",
+      "réponse": "Le plus grand océan du monde est l'océan Pacifique."
+    },
+    {
+      "question": "Combien de continents y a-t-il sur Terre ?",
+      "réponse": "Il y a sept continents sur Terre."
+    },
+    {
+      "question": "Quel est l'élément chimique dont le symbole est O ?",
+      "réponse": "L'élément chimique dont le symbole est O est l'oxygène."
+    },
+    {
+      "question": "Qui a écrit 'Les Misérables' ?",
+      "réponse": "'Les Misérables' a été écrit par Victor Hugo."
+    }
+  ]
+}
